@@ -35,7 +35,7 @@ export default class SceneInit {
 
   initScene() {
     this.scene = new THREE.Scene();
-    this.scene.background = this.createStudioBackground();
+    this.scene.background = new THREE.Color(0x000000);
 
     // Perspective camera positioned for optimal 3-quarter studio portrait
     this.camera = new THREE.PerspectiveCamera(

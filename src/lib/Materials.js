@@ -35,15 +35,8 @@ function createRubiksLogoTexture() {
   canvas.height = 512;
   const ctx = canvas.getContext('2d');
 
-  // Base vinyl white
-  ctx.fillStyle = '#f3f4f8';
-  ctx.fillRect(0, 0, 512, 512);
-
-  // Subtle vignette
-  const grad = ctx.createRadialGradient(256, 256, 120, 256, 256, 256);
-  grad.addColorStop(0, 'rgba(255, 255, 255, 0)');
-  grad.addColorStop(1, 'rgba(0, 0, 0, 0.05)');
-  ctx.fillStyle = grad;
+  // Base vinyl white (solid color)
+  ctx.fillStyle = '#f8fafc';
   ctx.fillRect(0, 0, 512, 512);
 
   ctx.save();
@@ -100,20 +93,19 @@ function createRubiksLogoTexture() {
   ctx.fill();
   ctx.restore();
 
-  // Typography: "RUBIK'S"
+  // Typography: Major Title (Audiowide)
   ctx.fillStyle = '#111827';
-  ctx.font =
-    '900 58px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
+  ctx.font = '900 48px "Audiowide", system-ui, sans-serif';
   ctx.textAlign = 'center';
   ctx.textBaseline = 'middle';
-  ctx.letterSpacing = '2px';
+  ctx.letterSpacing = '1px';
   ctx.fillText('RUBIX', 0, 8);
 
-  // Subtitle: "ORIGINAL"
+  // Subtitle: Secondary text (Poppins)
   ctx.fillStyle = '#b80c1d';
-  ctx.font =
-    '800 24px system-ui, -apple-system, "Segoe UI", Roboto, sans-serif';
-  ctx.fillText('', 0, 58);
+  ctx.font = '700 20px "Poppins", system-ui, sans-serif';
+  ctx.letterSpacing = '-0.5px';
+  ctx.fillText('ayochills™', 0, 58);
 
   // Year: "EST. 1974"
   // ctx.fillStyle = '#6b7280';

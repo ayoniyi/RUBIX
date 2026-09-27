@@ -121,7 +121,7 @@ function App() {
   };
 
   return (
-    <div className="relative w-screen h-screen overflow-hidden select-none bg-neutral-950 font-sans">
+    <div className="relative w-screen h-screen overflow-hidden select-none bg-black font-sans">
       {/* Three.js Canvas */}
       <canvas
         id="myThreeJsCanvas"
@@ -130,30 +130,30 @@ function App() {
 
       {/* Top Header Glassmorphic Bar */}
       <header className="absolute top-5 left-6 right-6 flex items-center justify-between pointer-events-none z-10">
-        {/* <div className="pointer-events-auto flex items-center gap-3.5 bg-neutral-900/70 backdrop-blur-xl border border-white/10 px-5 py-3 rounded-2xl shadow-2xl">
-          <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-rose-600 via-amber-500 to-sky-500 flex items-center justify-center shadow-lg shadow-rose-500/20">
-            <span className="text-white text-xs font-black tracking-tighter">
+        <div className="pointer-events-auto flex items-center gap-3.5 bg-black/90 border border-white/20 px-5 py-3 rounded-2xl shadow-2xl">
+          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
+            <span className="font-title text-black text-xs font-black tracking-tighter">
               3×3
             </span>
           </div>
           <div>
-            <h1 className="text-white font-bold text-base tracking-wide flex items-center gap-2">
-              RUBIK'S CUBE
-              <span className="text-[10px] uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-400 border border-emerald-500/30">
-                PBR Photoreal
+            <h1 className="text-white font-title text-sm tracking-wider flex items-center gap-2">
+              RUBIX
+              <span className="text-[10px] font-sans uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full bg-white text-black">
+                PBR
               </span>
             </h1>
-            <p className="text-xs text-neutral-400">
-              Physical lacquer clearcoat & studio reflections
+            <p className="text-xs text-neutral-400 font-sans">
+              ayochills™ edition
             </p>
           </div>
-        </div> */}
+        </div>
 
         {/* Selected Cubie Coordinate Indicator */}
-        <div className="pointer-events-auto hidden md:flex items-center gap-3 bg-neutral-900/70 backdrop-blur-xl border border-white/10 px-4 py-2.5 rounded-2xl shadow-xl text-xs text-neutral-300">
-          <span className="inline-block w-2.5 h-2.5 rounded-full bg-sky-400 animate-pulse"></span>
+        <div className="pointer-events-auto hidden md:flex items-center gap-3 bg-black/90 border border-white/20 px-4 py-2.5 rounded-2xl shadow-xl text-xs text-neutral-300 font-sans">
+          <span className="inline-block w-2 h-2 rounded-full bg-white"></span>
           <span>Selected Cubie:</span>
-          <span className="font-mono bg-white/10 px-2 py-0.5 rounded text-white font-medium">
+          <span className="font-mono bg-white/10 px-2 py-0.5 rounded text-white font-medium border border-white/10">
             [{selectedCoords.x}, {selectedCoords.y}, {selectedCoords.z}]
           </span>
         </div>
@@ -162,14 +162,14 @@ function App() {
       {/* Bottom Action Bar */}
       <footer className="absolute bottom-6 left-6 right-6 flex flex-col md:flex-row items-center justify-between gap-4 pointer-events-none z-10">
         {/* Left Side: Actions */}
-        <div className="pointer-events-auto flex items-center gap-2.5 bg-neutral-900/80 backdrop-blur-xl border border-white/10 p-2 rounded-2xl shadow-2xl">
+        <div className="pointer-events-auto flex items-center gap-2.5 bg-black/90 border border-white/20 p-2 rounded-2xl shadow-2xl">
           <button
             onClick={handleScramble}
             disabled={isScrambling}
-            className={`px-4 py-2.5 rounded-xl font-medium text-xs tracking-wider uppercase transition-all duration-200 flex items-center gap-2 ${
+            className={`px-4 py-2.5 rounded-xl font-sans font-medium text-xs tracking-wider uppercase transition-all duration-200 flex items-center gap-2 ${
               isScrambling
-                ? 'bg-amber-500/20 text-amber-300 border border-amber-500/30 cursor-wait'
-                : 'bg-white/10 hover:bg-white/20 text-white border border-white/10 hover:scale-105 active:scale-95'
+                ? 'bg-neutral-900 text-neutral-400 border border-white/10 cursor-wait'
+                : 'bg-black hover:bg-white text-white hover:text-black border border-white/20 active:scale-95'
             }`}
           >
             <svg
@@ -191,7 +191,7 @@ function App() {
           <button
             onClick={handleReset}
             disabled={isScrambling}
-            className="px-4 py-2.5 rounded-xl font-medium text-xs tracking-wider uppercase transition-all duration-200 bg-white/10 hover:bg-white/20 text-white border border-white/10 hover:scale-105 active:scale-95 flex items-center gap-2 disabled:opacity-50"
+            className="px-4 py-2.5 rounded-xl font-sans font-medium text-xs tracking-wider uppercase transition-all duration-200 bg-black hover:bg-white text-white hover:text-black border border-white/20 active:scale-95 flex items-center gap-2 disabled:opacity-40"
           >
             <svg
               className="w-3.5 h-3.5"
@@ -211,10 +211,10 @@ function App() {
 
           <button
             onClick={() => setIsAutoRotate(!isAutoRotate)}
-            className={`px-4 py-2.5 rounded-xl font-medium text-xs tracking-wider uppercase transition-all duration-200 flex items-center gap-2 ${
+            className={`px-4 py-2.5 rounded-xl font-sans font-medium text-xs tracking-wider uppercase transition-all duration-200 flex items-center gap-2 ${
               isAutoRotate
-                ? 'bg-sky-500/20 text-sky-400 border border-sky-500/30 shadow-lg shadow-sky-500/20'
-                : 'bg-white/10 hover:bg-white/20 text-white border border-white/10 hover:scale-105 active:scale-95'
+                ? 'bg-white text-black border border-white font-semibold'
+                : 'bg-black hover:bg-white text-white hover:text-black border border-white/20 active:scale-95'
             }`}
           >
             <svg
@@ -242,7 +242,7 @@ function App() {
           <button
             onClick={handleResetCamera}
             title="Reset Camera View"
-            className="p-2.5 rounded-xl bg-white/5 hover:bg-white/15 text-neutral-300 hover:text-white border border-white/10 transition-all hover:scale-105 active:scale-95"
+            className="p-2.5 rounded-xl bg-black hover:bg-white text-white hover:text-black border border-white/20 transition-all active:scale-95"
           >
             <svg
               className="w-4 h-4"
@@ -261,10 +261,12 @@ function App() {
         </div>
 
         {/* Center / Right: Interactive Rotation Controls */}
-        <div className="pointer-events-auto bg-neutral-900/80 backdrop-blur-xl border border-white/10 p-3 rounded-2xl shadow-2xl flex flex-col items-center gap-2">
-          <div className="text-[11px] font-semibold text-neutral-400 uppercase tracking-widest flex items-center justify-between w-full px-1">
-            <span>Layer Rotations</span>
-            <span className="text-[10px] text-neutral-500 font-mono">
+        <div className="pointer-events-auto bg-black/90 border border-white/20 p-3 rounded-2xl shadow-2xl flex flex-col items-center gap-2">
+          <div className="flex items-center justify-between w-full px-1">
+            <span className="font-title text-xs text-white uppercase tracking-wider">
+              Layer Rotations
+            </span>
+            <span className="text-[10px] text-neutral-400 font-sans">
               Click or Press Keys
             </span>
           </div>
@@ -272,64 +274,76 @@ function App() {
           <div className="flex items-center gap-1.5">
             <button
               onClick={() => handleMove('w')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-white/10 hover:bg-sky-500/20 active:bg-sky-500/40 border border-white/10 hover:border-sky-500/40 transition-all hover:scale-105"
+              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-bold text-white group-hover:text-sky-300">
+              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
                 W
               </span>
-              <span className="text-[9px] text-neutral-400">▲ Col</span>
+              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+                ▲ Col
+              </span>
             </button>
 
             <button
               onClick={() => handleMove('s')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-white/10 hover:bg-sky-500/20 active:bg-sky-500/40 border border-white/10 hover:border-sky-500/40 transition-all hover:scale-105"
+              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-bold text-white group-hover:text-sky-300">
+              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
                 S
               </span>
-              <span className="text-[9px] text-neutral-400">▼ Col</span>
+              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+                ▼ Col
+              </span>
             </button>
 
             <button
               onClick={() => handleMove('a')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-white/10 hover:bg-sky-500/20 active:bg-sky-500/40 border border-white/10 hover:border-sky-500/40 transition-all hover:scale-105"
+              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-bold text-white group-hover:text-sky-300">
+              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
                 A
               </span>
-              <span className="text-[9px] text-neutral-400">◄ Row</span>
+              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+                ◄ Row
+              </span>
             </button>
 
             <button
               onClick={() => handleMove('d')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-white/10 hover:bg-sky-500/20 active:bg-sky-500/40 border border-white/10 hover:border-sky-500/40 transition-all hover:scale-105"
+              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-bold text-white group-hover:text-sky-300">
+              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
                 D
               </span>
-              <span className="text-[9px] text-neutral-400">► Row</span>
+              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+                ► Row
+              </span>
             </button>
 
-            <div className="w-[1px] h-7 bg-white/15 mx-1" />
+            <div className="w-[1px] h-7 bg-white/20 mx-1" />
 
             <button
               onClick={() => handleMove('q')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-white/10 hover:bg-amber-500/20 active:bg-amber-500/40 border border-white/10 hover:border-amber-500/40 transition-all hover:scale-105"
+              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-bold text-white group-hover:text-amber-300">
+              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
                 Q
               </span>
-              <span className="text-[9px] text-neutral-400">↺ Face</span>
+              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+                ↺ Face
+              </span>
             </button>
 
             <button
               onClick={() => handleMove('e')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-white/10 hover:bg-amber-500/20 active:bg-amber-500/40 border border-white/10 hover:border-amber-500/40 transition-all hover:scale-105"
+              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-bold text-white group-hover:text-amber-300">
+              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
                 E
               </span>
-              <span className="text-[9px] text-neutral-400">↻ Face</span>
+              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+                ↻ Face
+              </span>
             </button>
           </div>
         </div>
@@ -337,23 +351,23 @@ function App() {
 
       {/* Floating Instructions Helper */}
       <div className="absolute top-24 right-6 pointer-events-none hidden lg:block z-10">
-        <div className="bg-neutral-900/60 backdrop-blur-md border border-white/10 px-4 py-3 rounded-2xl shadow-xl text-xs text-neutral-300 space-y-1.5 max-w-[220px]">
-          <div className="font-semibold text-white/90 text-[11px] uppercase tracking-wider mb-1">
+        <div className="bg-black/90 border border-white/20 px-4 py-3 rounded-2xl shadow-xl text-xs text-neutral-300 space-y-1.5 max-w-[220px] font-sans">
+          <div className="font-title text-white text-xs uppercase tracking-wider mb-1">
             Controls Guide
           </div>
-          <div className="flex justify-between text-neutral-400">
+          <div className="flex justify-between text-neutral-400 font-sans">
             <span>Click Cubie:</span>
             <span className="text-white font-medium">Select Layer</span>
           </div>
-          <div className="flex justify-between text-neutral-400">
+          <div className="flex justify-between text-neutral-400 font-sans">
             <span>Left Drag:</span>
             <span className="text-white font-medium">Orbit View</span>
           </div>
-          <div className="flex justify-between text-neutral-400">
+          <div className="flex justify-between text-neutral-400 font-sans">
             <span>Right Drag:</span>
             <span className="text-white font-medium">Pan View</span>
           </div>
-          <div className="flex justify-between text-neutral-400">
+          <div className="flex justify-between text-neutral-400 font-sans">
             <span>Scroll:</span>
             <span className="text-white font-medium">Zoom In/Out</span>
           </div>

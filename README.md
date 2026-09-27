@@ -123,11 +123,14 @@ cube.cubeGroup.quaternion.setFromRotationMatrix(snapMatrix);
 
 ```bash
 rubix/
-├── index.html               # Entry HTML, web fonts (Plus Jakarta Sans, JetBrains Mono), Tailwind CSS
+├── index.html               # Entry HTML, web fonts (Plus Jakarta Sans, JetBrains Mono)
 ├── package.json             # NPM dependencies and build scripts
+├── postcss.config.js        # PostCSS configuration for Tailwind CSS & Autoprefixer
+├── tailwind.config.js       # Tailwind CSS configuration
 ├── vite.config.js           # Vite development and bundle configuration
 └── src/
-    ├── main.jsx             # React DOM root mounting
+    ├── index.css            # Base styles and Tailwind utility directives
+    ├── main.jsx             # React DOM root mounting and CSS import
     ├── App.jsx              # Main UI component, HUD controls, event listeners, raycasting
     └── lib/
         ├── Cube.js          # Individual cubie class (chassis, sticker meshes, highlight logic)
