@@ -1,17 +1,18 @@
 # 🧊 Rubix — Photorealistic 3D Rubik's Cube
 
-A high-performance, studio-grade 3D Rubik's Cube simulation built with **React**, **Three.js**, **Tween.js**, and **Vite**. Features physically-based rendering (PBR), procedural vinyl textures, realistic clearcoat lacquer, 5-point studio lighting, quaternion precision snapping, and an intuitive dual-input control system (keyboard + glassmorphic HUD).
+A high-performance, studio-grade 3D Rubik's Cube simulation built with **React**, **Three.js**, **Tween.js**, and **Vite**. Features physically-based rendering (PBR), procedural vinyl textures, realistic clearcoat lacquer, 5-point studio lighting, a monochrome spotlight studio backdrop gradient, quaternion precision snapping, and a responsive mobile-first HUD control suite.
 
 ---
 
 ## 🌟 Highlights
 
 - **Photorealistic PBR Materials**: Dual-layer car-lacquer clearcoat (`clearcoat: 0.85`), micro-roughness bump mapping simulating fine injection-molded plastic grain, and authentic vinyl stickers.
-- **100% Procedural & Self-Contained**: Zero external texture images or 3D models. The authentic center white face logo, micro-noise surface relief, and studio vignette background are generated entirely at runtime via Canvas2D & Three.js PMREM.
+- **Monochrome Studio Backdrop**: Seamless vertical linear gradient backdrop blending subtle white/gray diffused lighting, charcoal, and deep black without any visible radial or circular shapes.
+- **Fully Responsive & Touch-Optimized**: Mobile-first adaptive UI featuring stacked action bars, accessible 40px+ touch targets, dynamic camera FOV adjustments, tap-jitter tolerance, and an on-demand controls guide modal.
+- **100% Procedural & Self-Contained**: Zero external texture images or 3D models. The authentic center white face logo with `ayochills™` insignia, micro-noise surface relief, and studio background are generated entirely at runtime.
 - **Precision Rotation Engine**: Matrix-based world-axis rotations animated with `@tweenjs/tween.js` easing, accompanied by floating-point drift elimination and orthogonal quaternion snapping.
 - **Interactive Layer Selection**: Raycast-based cubie picker with visual emissive highlighting and live HUD coordinate tracking `[x, y, z]`.
 - **Full Action Suite**: Multi-step automated scrambler (14-move sequence with dynamic delays), state reset, camera auto-rotation showcase (turntable mode), and camera view re-centering.
-- **Glassmorphic Studio UI**: Sleek dark-mode interface built with Tailwind CSS, backdrop blur filters, and real-time interaction feedback.
 
 ---
 

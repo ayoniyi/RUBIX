@@ -10,6 +10,7 @@ function App() {
   const [isAutoRotate, setIsAutoRotate] = useState(false);
   const [selectedCoords, setSelectedCoords] = useState({ x: 0, y: 1, z: 0 });
   const [isScrambling, setIsScrambling] = useState(false);
+  const [showHelp, setShowHelp] = useState(false);
 
   useEffect(() => {
     const test = new SceneInit('myThreeJsCanvas');
@@ -48,7 +49,7 @@ function App() {
         event.clientX - mouseDownPos.x,
         event.clientY - mouseDownPos.y
       );
-      if (dist > 5) return;
+      if (dist > 12) return;
 
       mouse.x = (event.clientX / window.innerWidth) * 2 - 1;
       mouse.y = -(event.clientY / window.innerHeight) * 2 + 1;
@@ -129,51 +130,62 @@ function App() {
       />
 
       {/* Top Header Glassmorphic Bar */}
-      <header className="absolute top-5 left-6 right-6 flex items-center justify-between pointer-events-none z-10">
-        <div className="pointer-events-auto flex items-center gap-3.5 bg-black/90 border border-white/20 px-5 py-3 rounded-2xl shadow-2xl">
-          <div className="w-8 h-8 rounded-lg bg-white flex items-center justify-center">
-            <span className="font-title text-black text-xs font-black tracking-tighter">
+      <header className="absolute top-3 sm:top-5 left-3 sm:left-6 right-3 sm:right-6 flex items-center justify-between pointer-events-none z-10 gap-2">
+        <div className="pointer-events-auto flex items-center gap-2 sm:gap-3.5 bg-black/90 border border-white/20 px-3 py-2 sm:px-5 sm:py-3 rounded-xl sm:rounded-2xl shadow-2xl">
+          <div className="w-7 h-7 sm:w-8 sm:h-8 rounded-lg bg-white flex items-center justify-center shrink-0">
+            <span className="font-title text-black text-[11px] sm:text-xs font-black tracking-tighter">
               3×3
             </span>
           </div>
           <div>
-            <h1 className="text-white font-title text-sm tracking-wider flex items-center gap-2">
+            <h1 className="text-white font-title text-xs sm:text-sm tracking-wider flex items-center gap-1.5 sm:gap-2">
               RUBIX
-              <span className="text-[10px] font-sans uppercase font-semibold tracking-wider px-2 py-0.5 rounded-full bg-white text-black">
+              <span className="text-[9px] sm:text-[10px] font-sans uppercase font-semibold tracking-wider px-1.5 sm:px-2 py-0.5 rounded-full bg-white text-black">
                 PBR
               </span>
             </h1>
-            <p className="text-xs text-neutral-400 font-sans">
+            <p className="text-[10px] sm:text-xs text-neutral-400 font-sans">
               ayochills™ edition
             </p>
           </div>
         </div>
 
-        {/* Selected Cubie Coordinate Indicator */}
-        <div className="pointer-events-auto hidden md:flex items-center gap-3 bg-black/90 border border-white/20 px-4 py-2.5 rounded-2xl shadow-xl text-xs text-neutral-300 font-sans">
-          <span className="inline-block w-2 h-2 rounded-full bg-white"></span>
-          <span>Selected Cubie:</span>
-          <span className="font-mono bg-white/10 px-2 py-0.5 rounded text-white font-medium border border-white/10">
-            [{selectedCoords.x}, {selectedCoords.y}, {selectedCoords.z}]
-          </span>
+        {/* Selected Cubie Coordinate Indicator & Help Button */}
+        <div className="pointer-events-auto flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center gap-1.5 sm:gap-2.5 bg-black/90 border border-white/20 px-2.5 py-1.5 sm:px-4 sm:py-2.5 rounded-xl sm:rounded-2xl shadow-xl text-[11px] sm:text-xs text-neutral-300 font-sans">
+            <span className="inline-block w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full bg-white shrink-0"></span>
+            <span className="hidden sm:inline">Selected:</span>
+            <span className="font-mono bg-white/10 px-1.5 py-0.5 rounded text-white text-[10px] sm:text-xs font-medium border border-white/10">
+              [{selectedCoords.x}, {selectedCoords.y}, {selectedCoords.z}]
+            </span>
+          </div>
+
+          <button
+            onClick={() => setShowHelp((prev) => !prev)}
+            aria-label="Controls Guide"
+            className="p-1.5 sm:p-2 rounded-xl bg-black/90 hover:bg-white text-white hover:text-black border border-white/20 transition-all text-xs font-title flex items-center justify-center w-7 h-7 sm:w-8 sm:h-8 active:scale-95"
+            title="Controls Guide"
+          >
+            ?
+          </button>
         </div>
       </header>
 
-      {/* Bottom Action Bar */}
-      <footer className="absolute bottom-6 left-6 right-6 flex flex-col md:flex-row items-center justify-between gap-4 pointer-events-none z-10">
+      {/* Bottom Action Bar & Layer Rotations */}
+      <footer className="absolute bottom-3 sm:bottom-6 left-3 sm:left-6 right-3 sm:right-6 flex flex-col md:flex-row items-center justify-between gap-2.5 sm:gap-4 pointer-events-none z-10 max-w-[calc(100vw-24px)] mx-auto">
         {/* Left Side: Actions */}
-        <div className="pointer-events-auto flex items-center gap-2.5 bg-black/90 border border-white/20 p-2 rounded-2xl shadow-2xl">
+        <div className="pointer-events-auto flex items-center justify-center gap-1.5 sm:gap-2.5 bg-black/90 border border-white/20 p-1.5 sm:p-2 rounded-xl sm:rounded-2xl shadow-2xl w-full sm:w-auto overflow-x-auto">
           <button
             onClick={handleScramble}
             disabled={isScrambling}
-            className={`px-4 py-2.5 rounded-xl font-sans font-medium text-xs tracking-wider uppercase transition-all duration-200 flex items-center gap-2 ${
+            className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl font-sans font-medium text-[11px] sm:text-xs tracking-wider uppercase transition-all duration-200 flex items-center justify-center gap-1.5 shrink-0 ${
               isScrambling
                 ? 'bg-neutral-900 text-neutral-400 border border-white/10 cursor-wait'
                 : 'bg-black hover:bg-white text-white hover:text-black border border-white/20 active:scale-95'
             }`}
           >
             <svg
-              className="w-3.5 h-3.5"
+              className="w-3.5 h-3.5 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -185,16 +197,16 @@ function App() {
                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
               />
             </svg>
-            {isScrambling ? 'Scrambling...' : 'Scramble'}
+            <span>{isScrambling ? 'Scrambling...' : 'Scramble'}</span>
           </button>
 
           <button
             onClick={handleReset}
             disabled={isScrambling}
-            className="px-4 py-2.5 rounded-xl font-sans font-medium text-xs tracking-wider uppercase transition-all duration-200 bg-black hover:bg-white text-white hover:text-black border border-white/20 active:scale-95 flex items-center gap-2 disabled:opacity-40"
+            className="px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl font-sans font-medium text-[11px] sm:text-xs tracking-wider uppercase transition-all duration-200 bg-black hover:bg-white text-white hover:text-black border border-white/20 active:scale-95 flex items-center justify-center gap-1.5 disabled:opacity-40 shrink-0"
           >
             <svg
-              className="w-3.5 h-3.5"
+              className="w-3.5 h-3.5 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -206,19 +218,19 @@ function App() {
                 d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            Reset
+            <span>Reset</span>
           </button>
 
           <button
             onClick={() => setIsAutoRotate(!isAutoRotate)}
-            className={`px-4 py-2.5 rounded-xl font-sans font-medium text-xs tracking-wider uppercase transition-all duration-200 flex items-center gap-2 ${
+            className={`px-3 sm:px-4 py-2 sm:py-2.5 rounded-lg sm:rounded-xl font-sans font-medium text-[11px] sm:text-xs tracking-wider uppercase transition-all duration-200 flex items-center justify-center gap-1.5 shrink-0 ${
               isAutoRotate
                 ? 'bg-white text-black border border-white font-semibold'
                 : 'bg-black hover:bg-white text-white hover:text-black border border-white/20 active:scale-95'
             }`}
           >
             <svg
-              className="w-3.5 h-3.5"
+              className="w-3.5 h-3.5 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -236,16 +248,16 @@ function App() {
                 d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
               />
             </svg>
-            {isAutoRotate ? 'Showcase ON' : 'Turntable'}
+            <span>{isAutoRotate ? 'Showcase ON' : 'Turntable'}</span>
           </button>
 
           <button
             onClick={handleResetCamera}
             title="Reset Camera View"
-            className="p-2.5 rounded-xl bg-black hover:bg-white text-white hover:text-black border border-white/20 transition-all active:scale-95"
+            className="p-2 sm:p-2.5 rounded-lg sm:rounded-xl bg-black hover:bg-white text-white hover:text-black border border-white/20 transition-all active:scale-95 shrink-0"
           >
             <svg
-              className="w-4 h-4"
+              className="w-4 h-4 shrink-0"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -261,87 +273,87 @@ function App() {
         </div>
 
         {/* Center / Right: Interactive Rotation Controls */}
-        <div className="pointer-events-auto bg-black/90 border border-white/20 p-3 rounded-2xl shadow-2xl flex flex-col items-center gap-2">
+        <div className="pointer-events-auto bg-black/90 border border-white/20 p-2 sm:p-3 rounded-xl sm:rounded-2xl shadow-2xl flex flex-col items-center gap-1.5 sm:gap-2 w-full sm:w-auto">
           <div className="flex items-center justify-between w-full px-1">
-            <span className="font-title text-xs text-white uppercase tracking-wider">
+            <span className="font-title text-[10px] sm:text-xs text-white uppercase tracking-wider">
               Layer Rotations
             </span>
-            <span className="text-[10px] text-neutral-400 font-sans">
-              Click or Press Keys
+            <span className="text-[9px] sm:text-[10px] text-neutral-400 font-sans">
+              Tap or Press Keys
             </span>
           </div>
 
-          <div className="flex items-center gap-1.5">
+          <div className="flex items-center justify-center gap-1 sm:gap-1.5 w-full">
             <button
               onClick={() => handleMove('w')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
+              className="group flex flex-col items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-black hover:bg-white active:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
+              <span className="text-[11px] sm:text-xs font-title font-bold text-white group-hover:text-black group-active:text-black transition-colors">
                 W
               </span>
-              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+              <span className="text-[8px] sm:text-[9px] font-sans text-neutral-400 group-hover:text-black group-active:text-black transition-colors">
                 ▲ Col
               </span>
             </button>
 
             <button
               onClick={() => handleMove('s')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
+              className="group flex flex-col items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-black hover:bg-white active:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
+              <span className="text-[11px] sm:text-xs font-title font-bold text-white group-hover:text-black group-active:text-black transition-colors">
                 S
               </span>
-              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+              <span className="text-[8px] sm:text-[9px] font-sans text-neutral-400 group-hover:text-black group-active:text-black transition-colors">
                 ▼ Col
               </span>
             </button>
 
             <button
               onClick={() => handleMove('a')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
+              className="group flex flex-col items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-black hover:bg-white active:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
+              <span className="text-[11px] sm:text-xs font-title font-bold text-white group-hover:text-black group-active:text-black transition-colors">
                 A
               </span>
-              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+              <span className="text-[8px] sm:text-[9px] font-sans text-neutral-400 group-hover:text-black group-active:text-black transition-colors">
                 ◄ Row
               </span>
             </button>
 
             <button
               onClick={() => handleMove('d')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
+              className="group flex flex-col items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-black hover:bg-white active:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
+              <span className="text-[11px] sm:text-xs font-title font-bold text-white group-hover:text-black group-active:text-black transition-colors">
                 D
               </span>
-              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+              <span className="text-[8px] sm:text-[9px] font-sans text-neutral-400 group-hover:text-black group-active:text-black transition-colors">
                 ► Row
               </span>
             </button>
 
-            <div className="w-[1px] h-7 bg-white/20 mx-1" />
+            <div className="w-[1px] h-6 sm:h-7 bg-white/20 mx-0.5 sm:mx-1" />
 
             <button
               onClick={() => handleMove('q')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
+              className="group flex flex-col items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-black hover:bg-white active:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
+              <span className="text-[11px] sm:text-xs font-title font-bold text-white group-hover:text-black group-active:text-black transition-colors">
                 Q
               </span>
-              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+              <span className="text-[8px] sm:text-[9px] font-sans text-neutral-400 group-hover:text-black group-active:text-black transition-colors">
                 ↺ Face
               </span>
             </button>
 
             <button
               onClick={() => handleMove('e')}
-              className="group flex flex-col items-center justify-center w-12 h-12 rounded-xl bg-black hover:bg-white border border-white/20 transition-all active:scale-95"
+              className="group flex flex-col items-center justify-center w-10 h-10 sm:w-12 sm:h-12 rounded-lg sm:rounded-xl bg-black hover:bg-white active:bg-white border border-white/20 transition-all active:scale-95"
             >
-              <span className="text-xs font-title font-bold text-white group-hover:text-black transition-colors">
+              <span className="text-[11px] sm:text-xs font-title font-bold text-white group-hover:text-black group-active:text-black transition-colors">
                 E
               </span>
-              <span className="text-[9px] font-sans text-neutral-400 group-hover:text-black transition-colors">
+              <span className="text-[8px] sm:text-[9px] font-sans text-neutral-400 group-hover:text-black group-active:text-black transition-colors">
                 ↻ Face
               </span>
             </button>
@@ -349,8 +361,52 @@ function App() {
         </div>
       </footer>
 
-      {/* Floating Instructions Helper */}
-      <div className="absolute top-24 right-6 pointer-events-none hidden lg:block z-10">
+      {/* Floating Instructions Helper / Mobile Modal Overlay */}
+      {showHelp && (
+        <div
+          className="fixed inset-0 z-30 bg-black/70 backdrop-blur-sm flex items-center justify-center p-4 pointer-events-auto"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) setShowHelp(false);
+          }}
+        >
+          <div className="bg-black/95 border border-white/20 p-5 rounded-2xl shadow-2xl text-xs text-neutral-300 space-y-3 max-w-[280px] w-full font-sans">
+            <div className="flex items-center justify-between pb-2 border-b border-white/10">
+              <span className="font-title text-white text-xs uppercase tracking-wider">
+                Controls Guide
+              </span>
+              <button
+                onClick={() => setShowHelp(false)}
+                className="text-neutral-400 hover:text-white p-1 rounded-md text-sm font-bold"
+              >
+                ✕
+              </button>
+            </div>
+            <div className="flex justify-between text-neutral-400 font-sans">
+              <span>Tap Cubie:</span>
+              <span className="text-white font-medium">Select Layer</span>
+            </div>
+            <div className="flex justify-between text-neutral-400 font-sans">
+              <span>1-Finger Drag:</span>
+              <span className="text-white font-medium">Orbit View</span>
+            </div>
+            <div className="flex justify-between text-neutral-400 font-sans">
+              <span>2-Finger Drag:</span>
+              <span className="text-white font-medium">Pan View</span>
+            </div>
+            <div className="flex justify-between text-neutral-400 font-sans">
+              <span>Pinch / Scroll:</span>
+              <span className="text-white font-medium">Zoom In/Out</span>
+            </div>
+            <div className="pt-2 border-t border-white/10 flex justify-between text-neutral-400 font-sans">
+              <span>Turn Layers:</span>
+              <span className="text-white font-medium">W S A D Q E</span>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Desktop Persistent Helper Card */}
+      <div className="absolute top-20 sm:top-24 right-3 sm:right-6 pointer-events-none hidden lg:block z-10">
         <div className="bg-black/90 border border-white/20 px-4 py-3 rounded-2xl shadow-xl text-xs text-neutral-300 space-y-1.5 max-w-[220px] font-sans">
           <div className="font-title text-white text-xs uppercase tracking-wider mb-1">
             Controls Guide

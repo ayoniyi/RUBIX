@@ -14,17 +14,19 @@ export default class SceneInit {
   }
 
   createStudioBackground() {
+    if (typeof document === 'undefined') return null;
     const canvas = document.createElement('canvas');
     canvas.width = 1024;
     canvas.height = 1024;
     const ctx = canvas.getContext('2d');
 
-    // Elegant deep studio radial vignette
-    const grad = ctx.createRadialGradient(512, 420, 60, 512, 512, 650);
-    grad.addColorStop(0, '#161922');
-    grad.addColorStop(0.45, '#0d0f15');
-    grad.addColorStop(0.85, '#07080b');
-    grad.addColorStop(1, '#030406');
+    // Linear vertical studio backdrop gradient (seamless, zero radial or visible shapes)
+    const grad = ctx.createLinearGradient(0, 0, 0, 1024);
+    grad.addColorStop(0.0, '#090a0d');   // Deep black-gray ceiling
+    grad.addColorStop(0.32, '#1a1d24');  // Charcoal gray transition
+    grad.addColorStop(0.52, '#333842');  // Soft neutral gray/white diffused illumination
+    grad.addColorStop(0.75, '#1c1f26');  // Smooth lower transition
+    grad.addColorStop(1.0, '#050507');   // Solid dark base
 
     ctx.fillStyle = grad;
     ctx.fillRect(0, 0, 1024, 1024);
@@ -35,11 +37,12 @@ export default class SceneInit {
 
   initScene() {
     this.scene = new THREE.Scene();
-    this.scene.background = new THREE.Color(0x000000);
+    this.scene.background = this.createStudioBackground();
 
-    // Perspective camera positioned for optimal 3-quarter studio portrait
+    // Perspective camera positioned for optimal framing (wider FOV on mobile)
+    const isMobile = window.innerWidth < 768;
     this.camera = new THREE.PerspectiveCamera(
-      this.fov,
+      isMobile ? 44 : this.fov,
       window.innerWidth / window.innerHeight,
       1,
       1000
@@ -140,6 +143,8 @@ export default class SceneInit {
 
   onWindowResize() {
     if (!this.camera || !this.renderer) return;
+    const isMobile = window.innerWidth < 768;
+    this.camera.fov = isMobile ? 44 : this.fov;
     this.camera.aspect = window.innerWidth / window.innerHeight;
     this.camera.updateProjectionMatrix();
     this.renderer.setSize(window.innerWidth, window.innerHeight);
